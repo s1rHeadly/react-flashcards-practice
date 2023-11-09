@@ -8,9 +8,12 @@ import {questions} from './data.js'
 function App() {
 
 
+// set state to null as we have no id yet
 const [selected , setSelected] = useState(null);
 
 
+// function that is passed into the onClick event on the button
+// if the id we get from the card and set the selected state value
 const onHandleClick = (id) => {
    setSelected(id === selected ? null : id);
    console.log(selected, id)
