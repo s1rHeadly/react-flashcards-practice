@@ -1,23 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+
+import { useState } from 'react';
+import {questions} from './data.js'
+
+
+
 
 function App() {
+
+
+const [selected , setSelected] = useState(null);
+
+
+const onHandleClick = (id) => {
+   setSelected(id === selected ? null : id);
+   console.log(selected, id)
+}
+
+
+let allQuestions = 'Sorry no questions found';
+
+
+  if(questions.length > 0){
+      allQuestions = questions.map((question) => (
+        <div
+          className={question.id === selected && "selected"}
+          onClick={() => onHandleClick(question.id)}
+          key={question.id}>
+
+          <p>{question.id === selected ? question.answer : question.question}</p>
+        </div>
+      ))
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="flashcards">
+          {allQuestions}
     </div>
   );
 }
